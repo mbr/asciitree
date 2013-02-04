@@ -34,14 +34,15 @@ Here's a code sample::
 
 and its output::
 
-    root
+     root
        +--sub1
        +--sub2
-       |   +--sub2sub1
+       |  +--sub2sub1
        +--sub3
-           +--sub3sub1
-           |   +--sub3sub1sub1
-           +--sub3sub2
+          +--sub3sub1
+          |  +--sub3sub1sub1
+          +--sub3sub2
+
 
 API
 ---
