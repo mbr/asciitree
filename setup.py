@@ -12,7 +12,7 @@ def read(fname):
 
 setup(
     name='asciitree',
-    version='0.1',
+    version='0.2',
     description='Draws ASCII trees.',
     long_description=read('README.rst'),
     author='Marc Brinkmann',
