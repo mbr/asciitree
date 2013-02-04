@@ -27,9 +27,9 @@ def _draw_tree(node, prefix, child_iter, text_str):
 
     for index, child in enumerate(children):
         if index+1 == len(children):
-            sub_prefix = prefix + '    '
+            sub_prefix = prefix + '   '
         else:
-            sub_prefix = prefix + '   |'
+            sub_prefix = prefix + '  |'
 
         buf.write(
             _draw_tree(child, sub_prefix, child_iter, text_str)
