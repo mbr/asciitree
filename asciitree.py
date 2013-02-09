@@ -9,7 +9,7 @@ except ImportError:
 
 def draw_tree(node,
               child_iter=lambda n: n.children,
-              text_str=lambda n: str(n)):
+              text_str=str):
     return _draw_tree(node, '', child_iter, text_str)
 
 
