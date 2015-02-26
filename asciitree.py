@@ -10,7 +10,16 @@ except ImportError:
 def draw_tree(node,
               child_iter=lambda n: n.children,
               text_str=str):
+    # this method is kept around for backwards compatibility - existing code
+    # will call draw tree. do not use this in new code
     return _draw_tree(node, '', child_iter, text_str)
+
+
+def ascii_tree(node,
+               get_node_children=lambda t: t[1].items(),
+               get_node_text=lambda t: t[0],
+               get_root=lambda d: d.items()[0]):
+    return _draw_tree(get_root(node), '', get_node_children, get_node_text)
 
 
 def _draw_tree(node, prefix, child_iter, text_str):
@@ -39,25 +48,19 @@ def _draw_tree(node, prefix, child_iter, text_str):
 
 
 if __name__ == '__main__':
-    class Node(object):
-        def __init__(self, name, children):
-            self.name = name
-            self.children = children
+    nodes = {
+        'root': {
+            'sub1': {},
+            'sub2': {
+                'sub2sub1': {}
+            },
+            'sub3': {
+                'sub3sub1': {
+                    'sub3sub1sub1': {}
+                },
+                'sub3sub2': {}
+            }
+        }
+    }
 
-        def __str__(self):
-            return self.name
-
-    root = Node('root', [
-        Node('sub1', []),
-        Node('sub2', [
-            Node('sub2sub1', [])
-        ]),
-        Node('sub3', [
-            Node('sub3sub1', [
-                Node('sub3sub1sub1', [])
-            ]),
-            Node('sub3sub2', [])
-        ])
-    ])
-
-    print draw_tree(root)
+    print ascii_tree(nodes)
