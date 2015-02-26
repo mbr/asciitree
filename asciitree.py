@@ -6,6 +6,31 @@ try:
 except ImportError:
     from StringIO import StringIO
 
+class Node(object):
+    def __init__(self, name, children):
+        self.name = name
+        self.children = children
+
+    def __str__(self):
+        return self.name
+
+    # Call it with a collections.OrderedDict if node order
+    # is important!
+    # Also, there can only be one root node.
+    @classmethod
+    def from_dictionary(cls, node_dictionary):
+        def loop(nodes):
+            node_list = []
+            for name, children in nodes.iteritems():
+                if children:
+                    node_list.append(cls(name,
+                                         loop(children)))
+                else:
+                    node_list.append(cls(name, []))
+
+            return node_list
+
+        return loop(node_dictionary)[0]
 
 def draw_tree(node,
               child_iter=lambda n: n.children,
@@ -39,13 +64,7 @@ def _draw_tree(node, prefix, child_iter, text_str):
 
 
 if __name__ == '__main__':
-    class Node(object):
-        def __init__(self, name, children):
-            self.name = name
-            self.children = children
-
-        def __str__(self):
-            return self.name
+    print "Example #1:"
 
     root = Node('root', [
         Node('sub1', []),
@@ -61,3 +80,23 @@ if __name__ == '__main__':
     ])
 
     print draw_tree(root)
+
+    print "Example #2:"
+
+    nodes = {
+        'root': {
+            'sub1': {},
+            'sub2': {
+                'sub2sub1': {}
+            },
+            'sub3': {
+                'sub3sub1': {
+                    'sub3sub1sub1': {}
+                },
+                'sub3sub2': {}
+            }
+        }
+    }
+
+    print draw_tree(Node.from_dictionary(nodes))
+
