@@ -16,6 +16,8 @@ ASCII Trees
            +-- terminal
 
 
+.. highlight:: python
+
 ::
 
   from asciitree import LeftAligned
