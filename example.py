@@ -1,4 +1,4 @@
-from asciitree import ascii_tree
+from asciitree import left_aligned
 from collections import OrderedDict as OD
 from copy import deepcopy
 
@@ -24,7 +24,7 @@ tree = {
     ])
 }
 
-print ascii_tree(tree)
+print left_aligned(tree)
 print
 
 
@@ -32,4 +32,4 @@ print
 tree2 = deepcopy(tree)
 tree2['asciitree']['trees'] = deepcopy(tree2['asciitree'])
 
-print ascii_tree(tree2)
+print left_aligned(tree2)

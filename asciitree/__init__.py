@@ -9,3 +9,36 @@ def ascii_tree(node,
                get_node_text=lambda t: t[0],
                get_root=lambda d: d.items()[0]):
     return _draw_tree(get_root(node), '', get_node_children, get_node_text)
+
+
+def left_aligned(tree,
+                 get_node_children=lambda t: t[1].items(),
+                 get_node_text=lambda t: t[0],
+                 get_root=lambda d: d.items()[0],
+                 prefix=''):
+    return '\n'.join(_left_aligned(get_root(tree),
+                     get_node_children,
+                     get_node_text))
+
+
+def _left_aligned(node, get_node_children, get_node_text):
+    lines = []
+
+    children = get_node_children(node)
+    lines.append(get_node_text(node))
+
+    for n, child in enumerate(children):
+        child_tree = _left_aligned(child, get_node_children, get_node_text)
+
+        lines.append('  +--' + child_tree.pop(0))
+
+        if n == len(children) - 1:
+            # last child does not get the line drawn
+            prefix = '   '
+        else:
+            prefix = '   |'
+
+        child_tree = [prefix + l for l in child_tree]
+        lines.extend(child_tree)
+
+    return lines
