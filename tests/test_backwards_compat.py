@@ -9,8 +9,7 @@ def test_behaves_as_originally_advertised():
   +--sub3
      +--sub3sub1
      |  +--sub3sub1sub1
-     +--sub3sub2
-"""
+     +--sub3sub2"""
 
     class Node(object):
         def __init__(self, name, children):
