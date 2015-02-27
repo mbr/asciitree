@@ -42,22 +42,3 @@ def _draw_tree(node, prefix, child_iter, text_str):
         )
 
     return buf.getvalue()
-
-
-if __name__ == '__main__':
-    nodes = {
-        'root': {
-            'sub1': {},
-            'sub2': {
-                'sub2sub1': {}
-            },
-            'sub3': {
-                'sub3sub1': {
-                    'sub3sub1sub1': {}
-                },
-                'sub3sub2': {}
-            }
-        }
-    }
-
-    print ascii_tree(nodes)
