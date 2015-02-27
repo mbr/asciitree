@@ -4,21 +4,21 @@ ASCII Trees
 ::
 
   asciitree
-    +--sometimes
-    |  +--you
-    +--just
-    |  +--want
-    |     +--to
-    |     +--draw
-    +--trees
-    +--in
-       +--your
-          +--terminal
+   +-- sometimes
+   |   +-- you
+   +-- just
+   |   +-- want
+   |       +-- to
+   |       +-- draw
+   +-- trees
+   +-- in
+       +-- your
+           +-- terminal
 
 
-Sample code::
+::
 
-  from asciitree import ascii_tree
+  from asciitree import LeftAligned
   from collections import OrderedDict as OD
 
   tree = {
@@ -39,4 +39,5 @@ Sample code::
       ])
   }
 
-  print ascii_tree(tree)
+  tr = LeftAligned()
+  print tr(tree)
