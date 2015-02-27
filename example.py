@@ -2,7 +2,7 @@ from collections import OrderedDict as OD
 from copy import deepcopy
 
 from asciitree import LeftAligned
-from asciitree.drawing import BoxDraw, BOX_DOUBLE, BOX_BLANK
+from asciitree.drawing import BoxStyle, BOX_DOUBLE, BOX_BLANK
 
 tr = LeftAligned()
 
@@ -37,14 +37,14 @@ print tr(tree2)
 
 
 # use a box style
-box_tr = LeftAligned(draw=BoxDraw(gfx=BOX_DOUBLE, horiz_len=1))
+box_tr = LeftAligned(draw=BoxStyle(gfx=BOX_DOUBLE, horiz_len=1))
 print box_tr(tree)
 
 
 # more airy
-air_tr = LeftAligned(draw=BoxDraw(gfx=BOX_BLANK,
-                                  label_space=0,
-                                  label_format='[{}]',
-                                  indent=0)
+air_tr = LeftAligned(draw=BoxStyle(gfx=BOX_BLANK,
+                                   label_space=0,
+                                   label_format='[{}]',
+                                   indent=0)
                      )
 print air_tr(tree)

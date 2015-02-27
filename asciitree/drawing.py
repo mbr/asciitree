@@ -40,7 +40,7 @@ BOX_BLANK = {
 }
 
 
-class Draw(KeyArgsConstructor):
+class Style(KeyArgsConstructor):
     label_format = '{}'
 
     def node_label(self, text):
@@ -59,7 +59,7 @@ class Draw(KeyArgsConstructor):
         return line
 
 
-class BoxDraw(Draw):
+class BoxStyle(Style):
     gfx = BOX_ASCII
     label_space = 1
     horiz_len = 2

@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from .drawing import BoxDraw
+from .drawing import BoxStyle
 from .traversal import DictTraversal
 from .util import KeyArgsConstructor
 
 
 class LeftAligned(KeyArgsConstructor):
-    draw = BoxDraw()
+    draw = BoxStyle()
     traverse = DictTraversal()
 
     def render(self, node):
@@ -37,11 +37,11 @@ class LeftAligned(KeyArgsConstructor):
 
 # legacy support below
 
-from .drawing import Draw
+from .drawing import Style
 from .traversal import Traversal
 
 
-class LegacyDraw(Draw):
+class LegacyStyle(Style):
     def node_label(self, text):
         return text
 
@@ -67,4 +67,4 @@ def draw_tree(node,
     Its use is deprecated."""
     return LeftAligned(traverse=Traversal(get_text=text_str,
                                           get_children=child_iter),
-                       draw=LegacyDraw())(node)
+                       draw=LegacyStyle())(node)
