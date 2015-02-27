@@ -43,3 +43,6 @@ ASCII Trees
 
   tr = LeftAligned()
   print tr(tree)
+
+
+Read the documentation at http://pythonhosted.org/asciitree
