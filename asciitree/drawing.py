@@ -1,3 +1,5 @@
+from .util import KeyArgsConstructor
+
 BOX_LIGHT = {
     'UP_AND_RIGHT': u'\u2514',
     'HORIZONTAL': u'\u2500',
@@ -22,7 +24,7 @@ BOX_DOUBLE = {
 }
 
 
-ASCII = {
+BOX_ASCII = {
     'UP_AND_RIGHT': u'+',
     'HORIZONTAL': u'-',
     'VERTICAL': u'|',
@@ -30,9 +32,19 @@ ASCII = {
 }
 
 
-class Draw(object):
+BOX_BLANK = {
+    'UP_AND_RIGHT': u' ',
+    'HORIZONTAL': u' ',
+    'VERTICAL': u' ',
+    'VERTICAL_AND_RIGHT': u' ',
+}
+
+
+class Draw(KeyArgsConstructor):
+    label_format = '{}'
+
     def node_label(self, text):
-        return text
+        return self.label_format.format(text)
 
     def child_head(self, label):
         return label
@@ -48,12 +60,10 @@ class Draw(object):
 
 
 class BoxDraw(Draw):
-    def __init__(self, gfx=ASCII, label_space=0, horiz_len=2, indent=1):
-        self.gfx = gfx
-        self.label_space = label_space
-        self.label_space = label_space
-        self.horiz_len = horiz_len
-        self.indent = indent
+    gfx = BOX_ASCII
+    label_space = 1
+    horiz_len = 2
+    indent = 1
 
     def child_head(self, label):
         return (' ' * self.indent

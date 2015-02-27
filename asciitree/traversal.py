@@ -1,4 +1,7 @@
-class Traversal(object):
+from .util import KeyArgsConstructor
+
+
+class Traversal(KeyArgsConstructor):
     def get_children(self, node):
         raise NotImplementedError
 
@@ -9,7 +12,7 @@ class Traversal(object):
         return str(node)
 
 
-class DictTraversal(object):
+class DictTraversal(KeyArgsConstructor):
     def get_children(self, node):
         return node[1].items()
 

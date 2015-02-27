@@ -3,15 +3,12 @@
 
 from .drawing import BoxDraw
 from .traversal import DictTraversal
+from .util import KeyArgsConstructor
 
 
-class LeftAligned(object):
+class LeftAligned(KeyArgsConstructor):
     draw = BoxDraw()
     traverse = DictTraversal()
-
-    def __init__(self, **kwargs):
-        for k, v in kwargs.items():
-            setattr(self, k, v)
 
     def render(self, node):
         lines = []
@@ -68,8 +65,6 @@ def draw_tree(node,
 
     This function solely exist to not break old code (using asciitree 0.2).
     Its use is deprecated."""
-    traverse = Traversal()
-    traverse.get_text = text_str
-    traverse.get_children = child_iter
-
-    return LeftAligned(traverse=traverse, draw=LegacyDraw())(node)
+    return LeftAligned(traverse=Traversal(get_text=text_str,
+                                          get_children=child_iter),
+                       draw=LegacyDraw())(node)
