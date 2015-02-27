@@ -3,6 +3,13 @@ asciitree
 
 ``asciitree`` draws tree structures using characters.
 
+.. include:: ../README.rst
+
+Fancier examples:
+
+.. literalinclude:: ../example.py
+   :language: python
+
 
 API
 ===
