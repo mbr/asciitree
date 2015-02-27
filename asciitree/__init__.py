@@ -29,13 +29,13 @@ def _left_aligned(node, get_node_children, get_node_text):
     for n, child in enumerate(children):
         child_tree = _left_aligned(child, get_node_children, get_node_text)
 
-        lines.append('  +--' + child_tree.pop(0))
-
         if n == len(children) - 1:
             # last child does not get the line drawn
+            lines.append('  +--' + child_tree.pop(0))
             prefix = '   '
         else:
-            prefix = '   |'
+            lines.append('  +--' + child_tree.pop(0))
+            prefix = '  |'
 
         child_tree = [prefix + l for l in child_tree]
         lines.extend(child_tree)
