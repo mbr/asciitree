@@ -14,8 +14,7 @@ def ascii_tree(node,
 def left_aligned(tree,
                  get_node_children=lambda t: t[1].items(),
                  get_node_text=lambda t: t[0],
-                 get_root=lambda d: d.items()[0],
-                 prefix=''):
+                 get_root=lambda d: d.items()[0]):
     return '\n'.join(_left_aligned(get_root(tree),
                      get_node_children,
                      get_node_text))
