@@ -1,9 +1,9 @@
-from asciitree import LeftAligned, BoxDraw
+from asciitree import LeftAligned
 from collections import OrderedDict as OD
 from copy import deepcopy
 
 
-tr = LeftAligned(draw=BoxDraw())
+tr = LeftAligned()
 
 
 # a basic tree
