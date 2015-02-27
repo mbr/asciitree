@@ -7,10 +7,20 @@ from .util import KeyArgsConstructor
 
 
 class LeftAligned(KeyArgsConstructor):
+    """Creates a renderer for a left-aligned tree.
+
+    Any attributes of the resulting class instances can be set as
+    constructor arguments."""
+
     draw = BoxStyle()
+    "The draw style used. See :class:`~asciitree.drawing.Style`."
     traverse = DictTraversal()
+    "Traversal method. See :class:`~asciitree.traversal.Traversal`."
 
     def render(self, node):
+        """Renders a node. This function is used internally, as it returns
+        a list of lines. Use :func:`~asciitree.LeftAligned.__call__` instead.
+        """
         lines = []
 
         children = self.traverse.get_children(node)
@@ -32,6 +42,9 @@ class LeftAligned(KeyArgsConstructor):
         return lines
 
     def __call__(self, tree):
+        """Render the tree into string suitable for console output.
+
+        :param tree: A tree."""
         return '\n'.join(self.render(self.traverse.get_root(tree)))
 
 

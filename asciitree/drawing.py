@@ -5,7 +5,7 @@ BOX_LIGHT = {
     'HORIZONTAL': u'\u2500',
     'VERTICAL': u'\u2502',
     'VERTICAL_AND_RIGHT': u'\u251C',
-}
+}  #: Unicode box-drawing glyphs, light style
 
 
 BOX_HEAVY = {
@@ -13,7 +13,7 @@ BOX_HEAVY = {
     'HORIZONTAL': u'\u2501',
     'VERTICAL': u'\u2503',
     'VERTICAL_AND_RIGHT': u'\u2523',
-}
+}  #: Unicode box-drawing glyphs, heavy style
 
 
 BOX_DOUBLE = {
@@ -21,7 +21,7 @@ BOX_DOUBLE = {
     'HORIZONTAL': u'\u2550',
     'VERTICAL': u'\u2551',
     'VERTICAL_AND_RIGHT': u'\u2560',
-}
+}  #: Unicode box-drawing glyphs, double-line style
 
 
 BOX_ASCII = {
@@ -29,7 +29,7 @@ BOX_ASCII = {
     'HORIZONTAL': u'-',
     'VERTICAL': u'|',
     'VERTICAL_AND_RIGHT': u'+',
-}
+}  #: Unicode box-drawing glyphs, using only ascii ``|+-`` characters.
 
 
 BOX_BLANK = {
@@ -37,33 +37,42 @@ BOX_BLANK = {
     'HORIZONTAL': u' ',
     'VERTICAL': u' ',
     'VERTICAL_AND_RIGHT': u' ',
-}
+}  #: Unicode box-drawing glyphs, using only spaces.
 
 
 class Style(KeyArgsConstructor):
-    label_format = '{}'
+    """Rendering style for trees."""
+    label_format = '{}'  #: Format for labels.
 
     def node_label(self, text):
+        """Render a node text into a label."""
         return self.label_format.format(text)
 
     def child_head(self, label):
+        """Render a node label into final output."""
         return label
 
     def child_tail(self, line):
+        """Render a node line that is not a label into final output."""
         return line
 
     def last_child_head(self, label):
+        """Like :func:`~asciitree.drawing.Style.child_head` but only called
+        for the last child."""
         return label
 
     def last_child_tail(self, line):
+        """Like :func:`~asciitree.drawing.Style.child_tail` but only called
+        for the last child."""
         return line
 
 
 class BoxStyle(Style):
-    gfx = BOX_ASCII
-    label_space = 1
-    horiz_len = 2
-    indent = 1
+    """A rendering style that uses box draw characters and a common layout."""
+    gfx = BOX_ASCII   #: Glyhps to use.
+    label_space = 1   #: Space between glyphs and label.
+    horiz_len = 2     #: Length of horizontal lines
+    indent = 1        #: Indent for subtrees
 
     def child_head(self, label):
         return (' ' * self.indent
