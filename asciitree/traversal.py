@@ -12,7 +12,7 @@ class Traversal(KeyArgsConstructor):
         return str(node)
 
 
-class DictTraversal(KeyArgsConstructor):
+class DictTraversal(Traversal):
     def get_children(self, node):
         return node[1].items()
 
@@ -21,3 +21,10 @@ class DictTraversal(KeyArgsConstructor):
 
     def get_text(self, node):
         return node[0]
+
+
+class AttributeTraversal(Traversal):
+    attribute = 'children'
+
+    def get_children(self, node):
+        return getattr(node, self.attribute)
