@@ -9,7 +9,7 @@ from .util import KeyArgsConstructor
 class LeftAligned(KeyArgsConstructor):
     """Creates a renderer for a left-aligned tree.
 
-    Any attributes of the resulting class instances can be set as
+    Any attributes of the resulting class instances can be set using
     constructor arguments."""
 
     draw = BoxStyle()
