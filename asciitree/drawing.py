@@ -42,7 +42,7 @@ BOX_BLANK = {
 
 class Style(KeyArgsConstructor):
     """Rendering style for trees."""
-    label_format = '{}'  #: Format for labels.
+    label_format = u'{}'  #: Format for labels.
 
     def node_label(self, text):
         """Render a node text into a label."""
