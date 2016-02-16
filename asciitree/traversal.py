@@ -23,10 +23,10 @@ class DictTraversal(Traversal):
     """Traversal suitable for a dictionary. Keys are tree labels, all values
     must be dictionaries as well."""
     def get_children(self, node):
-        return node[1].items()
+        return list(node[1].items())
 
     def get_root(self, tree):
-        return tree.items()[0]
+        return list(tree.items())[0]
 
     def get_text(self, node):
         return node[0]
