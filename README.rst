@@ -1,7 +1,7 @@
 ASCII Trees
 ===========
 
-::
+.. code:: console
 
   asciitree
    +-- sometimes
@@ -16,9 +16,7 @@ ASCII Trees
            +-- terminal
 
 
-.. highlight:: python
-
-::
+.. code:: python
 
   from asciitree import LeftAligned
   from collections import OrderedDict as OD
