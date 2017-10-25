@@ -66,6 +66,18 @@ class LegacyStyle(Style):
     def node_label(self, text):
         return text
 
+    def only_child_head(self, label):
+        return self.last_child_head(label)
+
+    def only_child_tail(self, line):
+        return self.last_child_tail(line)
+
+    def first_child_head(self, label):
+        return self.child_head(label)
+
+    def first_child_tail(self, line):
+        return self.child_tail(line)
+
     def child_head(self, label):
         return '  +--' + label
 
