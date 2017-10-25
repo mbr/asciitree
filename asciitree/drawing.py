@@ -94,6 +94,12 @@ class BoxStyle(Style):
     horiz_len = 2     #: Length of horizontal lines
     indent = 1        #: Indent for subtrees
 
+    def only_child_head(self, label):
+        return self.last_child_head(label)
+
+    def only_child_tail(self, line):
+        return self.last_child_tail(line)
+
     def first_child_head(self, label):
         return self.child_head(label)
 
