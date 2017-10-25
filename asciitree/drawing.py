@@ -48,6 +48,16 @@ class Style(KeyArgsConstructor):
         """Render a node text into a label."""
         return self.label_format.format(text)
 
+    def only_child_head(self, label):
+        """Like :func:`~asciitree.drawing.Style.child_head` but only called
+        for the only child."""
+        return label
+
+    def only_child_tail(self, line):
+        """Like :func:`~asciitree.drawing.Style.child_tail` but only called
+        for the only child."""
+        return line
+
     def first_child_head(self, label):
         """Like :func:`~asciitree.drawing.Style.child_head` but only called
         for the first child."""
