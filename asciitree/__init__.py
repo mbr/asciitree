@@ -29,7 +29,11 @@ class LeftAligned(KeyArgsConstructor):
         for n, child in enumerate(children):
             child_tree = self.render(child)
 
-            if n == 0:
+            if n == 0 and n == len(children) - 1:
+                lines.append(self.draw.only_child_head(child_tree.pop(0)))
+                lines.extend(self.draw.only_child_tail(l)
+                             for l in child_tree)
+            elif n == 0:
                 lines.append(self.draw.first_child_head(child_tree.pop(0)))
                 lines.extend(self.draw.first_child_tail(l)
                              for l in child_tree)
