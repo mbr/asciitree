@@ -1,1 +1,4 @@
 include LICENSE
+graft docs
+graft tests
+include example.py
