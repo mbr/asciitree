@@ -48,6 +48,26 @@ class Style(KeyArgsConstructor):
         """Render a node text into a label."""
         return self.label_format.format(text)
 
+    def only_child_head(self, label):
+        """Like :func:`~asciitree.drawing.Style.child_head` but only called
+        for the only child."""
+        return label
+
+    def only_child_tail(self, line):
+        """Like :func:`~asciitree.drawing.Style.child_tail` but only called
+        for the only child."""
+        return line
+
+    def first_child_head(self, label):
+        """Like :func:`~asciitree.drawing.Style.child_head` but only called
+        for the first child."""
+        return label
+
+    def first_child_tail(self, line):
+        """Like :func:`~asciitree.drawing.Style.child_tail` but only called
+        for the first child."""
+        return line
+
     def child_head(self, label):
         """Render a node label into final output."""
         return label
@@ -73,6 +93,18 @@ class BoxStyle(Style):
     label_space = 1   #: Space between glyphs and label.
     horiz_len = 2     #: Length of horizontal lines
     indent = 1        #: Indent for subtrees
+
+    def only_child_head(self, label):
+        return self.last_child_head(label)
+
+    def only_child_tail(self, line):
+        return self.last_child_tail(line)
+
+    def first_child_head(self, label):
+        return self.child_head(label)
+
+    def first_child_tail(self, line):
+        return self.child_tail(line)
 
     def child_head(self, label):
         return (' ' * self.indent

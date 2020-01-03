@@ -29,7 +29,15 @@ class LeftAligned(KeyArgsConstructor):
         for n, child in enumerate(children):
             child_tree = self.render(child)
 
-            if n == len(children) - 1:
+            if n == 0 and n == len(children) - 1:
+                lines.append(self.draw.only_child_head(child_tree.pop(0)))
+                lines.extend(self.draw.only_child_tail(l)
+                             for l in child_tree)
+            elif n == 0:
+                lines.append(self.draw.first_child_head(child_tree.pop(0)))
+                lines.extend(self.draw.first_child_tail(l)
+                             for l in child_tree)
+            elif n == len(children) - 1:
                 # last child does not get the line drawn
                 lines.append(self.draw.last_child_head(child_tree.pop(0)))
                 lines.extend(self.draw.last_child_tail(l)
@@ -57,6 +65,18 @@ from .traversal import Traversal
 class LegacyStyle(Style):
     def node_label(self, text):
         return text
+
+    def only_child_head(self, label):
+        return self.last_child_head(label)
+
+    def only_child_tail(self, line):
+        return self.last_child_tail(line)
+
+    def first_child_head(self, label):
+        return self.child_head(label)
+
+    def first_child_tail(self, line):
+        return self.child_tail(line)
 
     def child_head(self, label):
         return '  +--' + label
