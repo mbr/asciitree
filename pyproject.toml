@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "asciitree"
+version = "0.4.0"
+description = "Draws ASCII trees."
+readme = "README.rst"
+authors = [{ name = "Marc Brinkmann", email = "git@marcbrinkmann.de" }]
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/mbr/asciitree"
+
+[tool.setuptools]
+packages = ["asciitree"]
