@@ -11,10 +11,10 @@ build:
       - ./docs/install-nix-portable.sh
     build:
       html:
-        - '"$HOME/nix" build "^doc" -L'
+        - ~/nix build "^doc" -L
         # Copy inside nix-portable so the virtual store paths resolve.
         - |
-          "$HOME/nix" shell ".#default^doc" --command sh -eu -c "
+          ~/nix shell ".#default^doc" --command sh -eu -c "
             mkdir -p \"\$READTHEDOCS_OUTPUT/html\"
             cp -R result-doc/share/doc/*/html/. \"\$READTHEDOCS_OUTPUT/html/\"
           "
