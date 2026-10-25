@@ -35,6 +35,7 @@
           nativeBuildInputs = with python.pkgs; [
             sphinxHook
             myst-parser
+            furo
           ];
           nativeCheckInputs = [ python.pkgs.pytestCheckHook ];
           pythonImportsCheck = [ "asciitree" ];

@@ -9,7 +9,7 @@
 ### Changed
 
 - Moved setuptools configuration to `pyproject.toml`.
-- Switched docs to Alabaster.
+- Switched docs to Furo.
 - Converted README and docs to Markdown with MyST.
 
 ## [0.3.3] - 2016-09-05
