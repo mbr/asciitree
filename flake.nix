@@ -18,6 +18,21 @@
         pkgs = nixpkgs.legacyPackages.${system};
         python = pkgs.python3;
         pyproject = builtins.fromTOML (builtins.readFile ./pyproject.toml);
+        docsPackages = with python.pkgs; [
+          sphinx
+          furo
+        ];
+        docs =
+          pkgs.runCommand "${pyproject.project.name}-docs-${pyproject.project.version}"
+            {
+              src = ./.;
+              nativeBuildInputs = [ (python.withPackages (_: docsPackages)) ];
+            }
+            ''
+              cd "$src"
+              export PYTHONPATH="$PWD"
+              sphinx-build -W --keep-going -b html -d "$TMPDIR/doctrees" docs "$out"
+            '';
       in
       {
         packages.default = python.pkgs.buildPythonPackage {
@@ -31,8 +46,11 @@
           pythonImportsCheck = [ "asciitree" ];
         };
 
+        packages.docs = docs;
+        checks.docs = docs;
+
         devShells.default = pkgs.mkShell {
-          packages = [ (python.withPackages (ps: [ ps.pytest ])) ];
+          packages = [ (python.withPackages (ps: [ ps.pytest ] ++ docsPackages)) ];
         };
       }
     );
