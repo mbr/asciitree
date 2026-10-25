@@ -5,24 +5,20 @@ build:
   tools:
     python: "3.13"
   apt_packages:
-    - nix-bin
+    - proot
   # RTD wraps commands in single quotes; use double quotes within them.
   jobs:
     install:
-      - nix --version
-      - |
-        mkdir -p "$HOME/.config/nix"
-        printf "%s\n" \
-          "experimental-features = nix-command flakes" \
-          "store = local?root=$HOME/.local/share/nix/root" \
-          "build-users-group =" \
-          "sandbox = false" > "$HOME/.config/nix/nix.conf"
+      - proot --version
+      - curl -fL --retry 3 https://github.com/DavHau/nix-portable/releases/download/v012/nix-portable-x86_64 -o "$HOME/nix-portable"
+      - echo "b409c55904c909ac3aeda3fb1253319f86a89ddd1ba31a5dec33d4a06414c72a  $HOME/nix-portable" | sha256sum --check
+      - chmod +x "$HOME/nix-portable"
     build:
       html:
-        - nix build "^doc" -L
-        # Copy inside Nix so user-owned store paths resolve.
+        - NP_RUNTIME=proot NP_PROOT=/usr/bin/proot NP_GIT=$(command -v git) "$HOME/nix-portable" nix build "^doc" -L
+        # Copy inside nix-portable so the virtual store paths resolve.
         - |
-          nix shell ".#default^doc" --command sh -eu -c "
+          NP_RUNTIME=proot NP_PROOT=/usr/bin/proot NP_GIT=$(command -v git) "$HOME/nix-portable" nix shell ".#default^doc" --command sh -eu -c "
             mkdir -p \"\$READTHEDOCS_OUTPUT/html\"
             cp -R result-doc/share/doc/*/html/. \"\$READTHEDOCS_OUTPUT/html/\"
           "
