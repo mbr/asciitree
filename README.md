@@ -1,7 +1,5 @@
 # ASCII Trees
 
-[![Run on Repl.it](https://repl.it/badge/github/mbr/asciitree)](https://repl.it/github/mbr/asciitree)
-
 ```text
 asciitree
  +-- sometimes
