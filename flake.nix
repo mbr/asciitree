@@ -55,7 +55,10 @@
         };
 
         formatter = treefmt.config.build.wrapper;
-        checks.formatting = treefmt.config.build.check self;
+        checks = {
+          formatting = treefmt.config.build.check self;
+          library = self.packages.${system}.default;
+        };
 
         devShells.default = pkgs.mkShell {
           inputsFrom = [ self.packages.${system}.default ];

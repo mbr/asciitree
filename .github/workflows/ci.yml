@@ -1,0 +1,22 @@
+name: CI
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    container:
+      image: nixpkgs/nix-flakes:latest
+    steps:
+      - name: Checkout
+        run: |
+          git config --global --add safe.directory "$PWD"
+          git init
+          git remote add origin "https://github.com/$GITHUB_REPOSITORY.git"
+          git fetch --depth=1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+      - name: Check
+        run: nix flake check -L
