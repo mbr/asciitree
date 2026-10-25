@@ -3,7 +3,6 @@ set -eu
 
 cd "$(dirname "$0")/.."
 build_dir=$(mktemp -d)
-trap 'rm -rf "$build_dir"' EXIT
 
 source_dir="$build_dir/proot"
 git clone --depth=1 --revision=25dc6a3134891f98a79f57ce1c2c1b23ff15cad1 \
