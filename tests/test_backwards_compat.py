@@ -11,7 +11,7 @@ def test_behaves_as_originally_advertised():
      |  +--sub3sub1sub1
      +--sub3sub2"""
 
-    class Node(object):
+    class Node:
         def __init__(self, name, children):
             self.name = name
             self.children = children
@@ -20,13 +20,13 @@ def test_behaves_as_originally_advertised():
             return self.name
 
     root = Node(
-        'root',
+        "root",
         [
-            Node('sub1', []),
-            Node('sub2', [Node('sub2sub1', [])]),
+            Node("sub1", []),
+            Node("sub2", [Node("sub2sub1", [])]),
             Node(
-                'sub3',
-                [Node('sub3sub1', [Node('sub3sub1sub1', [])]), Node('sub3sub2', [])],
+                "sub3",
+                [Node("sub3sub1", [Node("sub3sub1sub1", [])]), Node("sub3sub2", [])],
             ),
         ],
     )

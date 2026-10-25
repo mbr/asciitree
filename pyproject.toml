@@ -17,7 +17,3 @@ Homepage = "https://github.com/mbr/asciitree"
 
 [tool.setuptools]
 packages = ["asciitree"]
-
-[tool.black]
-# Preserve Unicode prefixes for compatibility with Python 2.
-skip-string-normalization = true

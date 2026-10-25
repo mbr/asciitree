@@ -40,7 +40,7 @@ class AttributeTraversal(Traversal):
     Uses an attribute of a node as its list of children.
     """
 
-    attribute = 'children'  #: Attribute to use.
+    attribute = "children"  #: Attribute to use.
 
     def get_children(self, node):
         return getattr(node, self.attribute)

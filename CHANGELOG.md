@@ -12,6 +12,10 @@
 - Switched docs to Furo.
 - Converted README and docs to Markdown with MyST.
 
+### Removed
+
+- Python 2 compatibility; use `0.3.3` for Python 2.
+
 ## [0.3.3] - 2016-09-05
 
 ### Changed

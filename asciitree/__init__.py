@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 from .drawing import BoxStyle
 from .traversal import DictTraversal
@@ -43,7 +42,7 @@ class LeftAligned(KeyArgsConstructor):
         """Render the tree into string suitable for console output.
 
         :param tree: A tree."""
-        return '\n'.join(self.render(self.traverse.get_root(tree)))
+        return "\n".join(self.render(self.traverse.get_root(tree)))
 
 
 # legacy support below
@@ -57,16 +56,16 @@ class LegacyStyle(Style):
         return text
 
     def child_head(self, label):
-        return '  +--' + label
+        return "  +--" + label
 
     def child_tail(self, line):
-        return '  |' + line
+        return "  |" + line
 
     def last_child_head(self, label):
-        return '  +--' + label
+        return "  +--" + label
 
     def last_child_tail(self, line):
-        return '   ' + line
+        return "   " + line
 
 
 def draw_tree(node, child_iter=lambda n: n.children, text_str=str):

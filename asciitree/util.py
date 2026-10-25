@@ -1,4 +1,4 @@
-class KeyArgsConstructor(object):
+class KeyArgsConstructor:
     def __init__(self, **kwargs):
         for k, v in kwargs.items():
             setattr(self, k, v)
