@@ -14,6 +14,7 @@ dependencies = []
 
 [project.urls]
 Homepage = "https://github.com/mbr/asciitree"
+Documentation = "https://asciitree.readthedocs.io/en/stable/"
 
 [tool.setuptools]
 packages = ["asciitree"]

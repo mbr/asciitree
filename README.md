@@ -33,4 +33,4 @@ print(tr(tree))
 Since Python 3.7, dictionaries preserve insertion order. On older versions, use
 `collections.OrderedDict` to preserve the tree's display order.
 
-Read the documentation at <https://pythonhosted.org/asciitree/>.
+Read the documentation at <https://asciitree.readthedocs.io/en/stable/>.
