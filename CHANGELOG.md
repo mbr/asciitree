@@ -5,6 +5,7 @@
 ### Added
 
 - Nix builds, tests, docs, and direnv development shell.
+- Ruff linting, treefmt formatting, and Nix-based GitHub CI.
 
 ### Changed
 
