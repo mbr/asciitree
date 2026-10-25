@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-from .drawing import BoxStyle
-from .traversal import DictTraversal
+from .drawing import BoxStyle, Style
+from .traversal import DictTraversal, Traversal
 from .util import KeyArgsConstructor
 
 
@@ -31,10 +31,10 @@ class LeftAligned(KeyArgsConstructor):
             if n == len(children) - 1:
                 # last child does not get the line drawn
                 lines.append(self.draw.last_child_head(child_tree.pop(0)))
-                lines.extend(self.draw.last_child_tail(l) for l in child_tree)
+                lines.extend(self.draw.last_child_tail(line) for line in child_tree)
             else:
                 lines.append(self.draw.child_head(child_tree.pop(0)))
-                lines.extend(self.draw.child_tail(l) for l in child_tree)
+                lines.extend(self.draw.child_tail(line) for line in child_tree)
 
         return lines
 
@@ -46,9 +46,6 @@ class LeftAligned(KeyArgsConstructor):
 
 
 # legacy support below
-
-from .drawing import Style
-from .traversal import Traversal
 
 
 class LegacyStyle(Style):

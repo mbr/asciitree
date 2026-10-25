@@ -25,7 +25,8 @@
         treefmt = treefmt-nix.lib.evalModule pkgs {
           projectRootFile = "flake.nix";
           programs = {
-            black.enable = true;
+            ruff-check.enable = true;
+            ruff-format.enable = true;
             nixfmt.enable = true;
             mdformat.enable = true;
             taplo.enable = true;
@@ -62,7 +63,10 @@
 
         devShells.default = pkgs.mkShell {
           inputsFrom = [ self.packages.${system}.default ];
-          packages = [ treefmt.config.build.wrapper ];
+          packages = [
+            treefmt.config.build.wrapper
+            pkgs.ruff
+          ];
         };
       }
     );
