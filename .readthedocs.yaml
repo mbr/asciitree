@@ -1,12 +1,7 @@
 version: 2
 
-# Preferred Nix setup, in order:
-# 1. A Nix-enabled image; RTD offers neither one nor custom images.
-# 2. Ubuntu's `nix-bin`; the build user cannot access the system daemon.
-#    A user-owned store needs namespaces blocked by RTD; disabling sandboxing
-#    leaves `/nix/store` unmapped, so the builder cannot execute.
-# 3. `nix-bin` under PRoot, mapping a user-owned store onto `/nix`.
-#    Build PRoot from source for `fchmodat2` support, missing in Ubuntu's package.
+# RTD's non-root container does not support normal Nix operation;
+# use `proot` to map `/nix` to a local user directory.
 build:
   os: ubuntu-lts-latest
   tools:
@@ -20,5 +15,4 @@ build:
       html:
         - ~/nix build "^doc" -L
         - mkdir -p "$READTHEDOCS_OUTPUT/html"
-        # Resolve the virtual store paths while copying the HTML.
         - ~/proot -b "$HOME/.local/share/nix:/nix" sh -eu -c "cp -R result-doc/share/doc/*/html/. \"\$READTHEDOCS_OUTPUT/html/\""
