@@ -9,8 +9,8 @@ build-users-group =
 sandbox = false
 EOF
 
-cat >"$HOME/nix" <<'EOF'
+cat >"$HOME/proot-env" <<'EOF'
 #!/bin/sh
-exec "$HOME/proot" -b "$HOME/.local/share/nix:/nix" /usr/bin/nix "$@"
+exec "$HOME/proot" -b "$HOME/.local/share/nix:/nix" "$@"
 EOF
-chmod +x "$HOME/nix"
+chmod +x "$HOME/proot-env"

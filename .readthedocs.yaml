@@ -13,6 +13,6 @@ build:
       - ./docs/configure-nix.sh
     build:
       html:
-        - ~/nix build "^doc" -L
         - mkdir -p "$READTHEDOCS_OUTPUT/html"
-        - ~/proot -b "$HOME/.local/share/nix:/nix" sh -eu -c "cp -R result-doc/share/doc/*/html/. \"\$READTHEDOCS_OUTPUT/html/\""
+        - ~/proot-env nix build "^doc" -L
+        - ~/proot-env sh -eu -c "cp -R result-doc/share/doc/*/html/. \"\$READTHEDOCS_OUTPUT/html/\""
