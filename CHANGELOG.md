@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## [0.4.0] - 2026-10-25
 
 ### Added
 
@@ -57,3 +57,4 @@
 [0.3.1]: https://pypi.org/project/asciitree/0.3.1/
 [0.3.2]: https://pypi.org/project/asciitree/0.3.2/
 [0.3.3]: https://pypi.org/project/asciitree/0.3.3/
+[0.4.0]: https://pypi.org/project/asciitree/0.4.0/
