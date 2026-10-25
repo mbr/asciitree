@@ -66,6 +66,8 @@
           packages = [
             treefmt.config.build.wrapper
             pkgs.ruff
+            pkgs.twine
+            python.pkgs.build
           ];
         };
       }
