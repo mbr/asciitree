@@ -8,6 +8,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       flake-utils,
       ...
@@ -25,14 +26,22 @@
           version = pyproject.project.version;
           src = ./.;
           pyproject = true;
+          outputs = [
+            "out"
+            "doc"
+          ];
 
           build-system = [ python.pkgs.setuptools ];
+          nativeBuildInputs = with python.pkgs; [
+            sphinxHook
+            furo
+          ];
           nativeCheckInputs = [ python.pkgs.pytestCheckHook ];
           pythonImportsCheck = [ "asciitree" ];
         };
 
         devShells.default = pkgs.mkShell {
-          packages = [ (python.withPackages (ps: [ ps.pytest ])) ];
+          inputsFrom = [ self.packages.${system}.default ];
         };
       }
     );
