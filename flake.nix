@@ -32,10 +32,7 @@
           ];
 
           build-system = [ python.pkgs.setuptools ];
-          nativeBuildInputs = with python.pkgs; [
-            sphinxHook
-            furo
-          ];
+          nativeBuildInputs = [ python.pkgs.sphinxHook ];
           nativeCheckInputs = [ python.pkgs.pytestCheckHook ];
           pythonImportsCheck = [ "asciitree" ];
         };
