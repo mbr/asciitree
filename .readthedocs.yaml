@@ -4,11 +4,17 @@ build:
   os: ubuntu-24.04
   tools:
     python: "3.13"
-
-sphinx:
-  configuration: docs/conf.py
-
-python:
-  install:
-    - requirements: docs/requirements.txt
-    - path: .
+  jobs:
+    install:
+      - curl -fL --retry 3 https://github.com/DavHau/nix-portable/releases/download/v012/nix-portable-x86_64 -o "$HOME/nix-portable"
+      - echo "b409c55904c909ac3aeda3fb1253319f86a89ddd1ba31a5dec33d4a06414c72a  $HOME/nix-portable" | sha256sum --check
+      - chmod +x "$HOME/nix-portable"
+    build:
+      html:
+        - NP_GIT=$(command -v git) "$HOME/nix-portable" nix build '^doc' -L
+        # Copy inside nix-portable so the virtual store paths resolve.
+        - |
+          NP_GIT=$(command -v git) "$HOME/nix-portable" nix shell '.#default^doc' --command sh -eu -c '
+            mkdir -p "$READTHEDOCS_OUTPUT/html"
+            cp -R result-doc/share/doc/*/html/. "$READTHEDOCS_OUTPUT/html/"
+          '
