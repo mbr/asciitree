@@ -1,5 +1,12 @@
 version: 2
 
+# Preferred Nix setup, in order:
+# 1. A Nix-enabled image; RTD offers neither one nor custom images.
+# 2. Ubuntu's `nix-bin`; the build user cannot access the system daemon.
+#    A user-owned store needs namespaces blocked by RTD; disabling sandboxing
+#    leaves `/nix/store` unmapped, so the builder cannot execute.
+# 3. `nix-portable` with PRoot built from source for `fchmodat2` support,
+#    which the bundled and Ubuntu-packaged PRoot versions lacked.
 build:
   os: ubuntu-lts-latest
   tools:
