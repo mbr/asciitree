@@ -5,20 +5,20 @@ version: 2
 # 2. Ubuntu's `nix-bin`; the build user cannot access the system daemon.
 #    A user-owned store needs namespaces blocked by RTD; disabling sandboxing
 #    leaves `/nix/store` unmapped, so the builder cannot execute.
-# 3. `nix-portable` with PRoot built from source for `fchmodat2` support,
-#    which the bundled and Ubuntu-packaged PRoot versions lacked.
+# 3. `nix-bin` under PRoot, mapping a user-owned store onto `/nix`.
+#    Build PRoot from source for `fchmodat2` support, missing in Ubuntu's package.
 build:
   os: ubuntu-lts-latest
   tools:
     python: "3.13"
-  apt_packages: [build-essential, pkg-config, libtalloc-dev] # see build-proot.sh
+  apt_packages: [nix-bin, build-essential, pkg-config, libtalloc-dev] # see build-proot.sh
   jobs:
     install:
       - ./docs/build-proot.sh
-      - ./docs/install-nix-portable.sh
+      - ./docs/configure-nix.sh
     build:
       html:
         - ~/nix build "^doc" -L
         - mkdir -p "$READTHEDOCS_OUTPUT/html"
         # Resolve the virtual store paths while copying the HTML.
-        - ~/proot -b "$HOME/.nix-portable/nix:/nix" sh -eu -c "cp -R result-doc/share/doc/*/html/. \"\$READTHEDOCS_OUTPUT/html/\""
+        - ~/proot -b "$HOME/.local/share/nix:/nix" sh -eu -c "cp -R result-doc/share/doc/*/html/. \"\$READTHEDOCS_OUTPUT/html/\""
