@@ -1,4 +1,5 @@
 /result
+/result-doc
 __pycache__/
 *.py[cod]
 .pytest_cache/
