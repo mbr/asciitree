@@ -6,18 +6,19 @@ build:
     python: "3.13"
   apt_packages:
     - nix-bin
+  # RTD wraps commands in single quotes; use double quotes within them.
   jobs:
     install:
       - nix --version
       - |
         mkdir -p "$HOME/.config/nix"
-        printf '%s\n' 'experimental-features = nix-command flakes' 'sandbox-fallback = false' > "$HOME/.config/nix/nix.conf"
+        printf "%s\n" "experimental-features = nix-command flakes" "sandbox-fallback = false" > "$HOME/.config/nix/nix.conf"
     build:
       html:
-        - nix build '^doc' -L
+        - nix build "^doc" -L
         # Copy inside Nix so user-owned store paths resolve.
         - |
-          nix shell '.#default^doc' --command sh -eu -c '
-            mkdir -p "$READTHEDOCS_OUTPUT/html"
-            cp -R result-doc/share/doc/*/html/. "$READTHEDOCS_OUTPUT/html/"
-          '
+          nix shell ".#default^doc" --command sh -eu -c "
+            mkdir -p \"\$READTHEDOCS_OUTPUT/html\"
+            cp -R result-doc/share/doc/*/html/. \"\$READTHEDOCS_OUTPUT/html/\"
+          "
