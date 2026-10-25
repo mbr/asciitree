@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.0] - 2026-10-25
+
+### Added
+
+- Configurable layout spaces through `BoxStyle.gfx["SPACE"]`, with an ordinary-space fallback for existing palettes.
+
+### Changed
+
+- Declared the existing public API stable, without breaking changes from 0.4.0.
+
 ## [0.4.0] - 2026-10-25
 
 ### Added
@@ -58,3 +68,4 @@
 [0.3.2]: https://pypi.org/project/asciitree/0.3.2/
 [0.3.3]: https://pypi.org/project/asciitree/0.3.3/
 [0.4.0]: https://pypi.org/project/asciitree/0.4.0/
+[1.0.0]: https://pypi.org/project/asciitree/1.0.0/
