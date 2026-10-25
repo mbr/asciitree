@@ -9,12 +9,15 @@ build:
   jobs:
     install:
       - nix --version
+      - |
+        mkdir -p "$HOME/.config/nix"
+        printf '%s\n' 'experimental-features = nix-command flakes' 'sandbox-fallback = false' > "$HOME/.config/nix/nix.conf"
     build:
       html:
-        - nix --extra-experimental-features 'nix-command flakes' build '^doc' -L --option sandbox-fallback false
+        - nix build '^doc' -L
         # Copy inside Nix so user-owned store paths resolve.
         - |
-          nix --extra-experimental-features 'nix-command flakes' shell '.#default^doc' --command sh -eu -c '
+          nix shell '.#default^doc' --command sh -eu -c '
             mkdir -p "$READTHEDOCS_OUTPUT/html"
             cp -R result-doc/share/doc/*/html/. "$READTHEDOCS_OUTPUT/html/"
           '
