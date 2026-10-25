@@ -12,9 +12,6 @@ build:
     build:
       html:
         - ~/nix build "^doc" -L
+        - mkdir -p "$READTHEDOCS_OUTPUT/html"
         # Copy inside nix-portable so the virtual store paths resolve.
-        - |
-          ~/nix shell ".#default^doc" --command sh -eu -c "
-            mkdir -p \"\$READTHEDOCS_OUTPUT/html\"
-            cp -R result-doc/share/doc/*/html/. \"\$READTHEDOCS_OUTPUT/html/\"
-          "
+        - ~/nix shell "^doc" --command sh -eu -c "cp -R result-doc/share/doc/*/html/. \"\$READTHEDOCS_OUTPUT/html/\""
