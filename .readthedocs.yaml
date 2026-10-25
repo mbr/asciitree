@@ -8,7 +8,6 @@ build:
     - build-essential
     - pkg-config
     - libtalloc-dev
-    - patch
   # RTD wraps commands in single quotes; use double quotes within them.
   jobs:
     install:
