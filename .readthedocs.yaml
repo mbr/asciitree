@@ -8,15 +8,13 @@ build:
   jobs:
     install:
       - ./docs/build-proot.sh
-      - curl -fL --retry 3 https://github.com/DavHau/nix-portable/releases/download/v012/nix-portable-x86_64 -o "$HOME/nix-portable"
-      - echo "b409c55904c909ac3aeda3fb1253319f86a89ddd1ba31a5dec33d4a06414c72a  $HOME/nix-portable" | sha256sum --check
-      - chmod +x "$HOME/nix-portable"
+      - ./docs/install-nix-portable.sh
     build:
       html:
-        - NP_RUNTIME=proot NP_PROOT="$HOME/proot" NP_GIT=$(command -v git) "$HOME/nix-portable" nix build "^doc" -L
+        - '"$HOME/nix" build "^doc" -L'
         # Copy inside nix-portable so the virtual store paths resolve.
         - |
-          NP_RUNTIME=proot NP_PROOT="$HOME/proot" NP_GIT=$(command -v git) "$HOME/nix-portable" nix shell ".#default^doc" --command sh -eu -c "
+          "$HOME/nix" shell ".#default^doc" --command sh -eu -c "
             mkdir -p \"\$READTHEDOCS_OUTPUT/html\"
             cp -R result-doc/share/doc/*/html/. \"\$READTHEDOCS_OUTPUT/html/\"
           "
