@@ -5,7 +5,6 @@ build:
   tools:
     python: "3.13"
   apt_packages: [build-essential, pkg-config, libtalloc-dev] # see build-proot.sh
-  # RTD wraps commands in single quotes; use double quotes within them.
   jobs:
     install:
       - ./docs/build-proot.sh
