@@ -19,17 +19,16 @@ def test_behaves_as_originally_advertised():
         def __str__(self):
             return self.name
 
-    root = Node('root', [
-        Node('sub1', []),
-        Node('sub2', [
-            Node('sub2sub1', [])
-        ]),
-        Node('sub3', [
-            Node('sub3sub1', [
-                Node('sub3sub1sub1', [])
-            ]),
-            Node('sub3sub2', [])
-        ])
-    ])
+    root = Node(
+        'root',
+        [
+            Node('sub1', []),
+            Node('sub2', [Node('sub2sub1', [])]),
+            Node(
+                'sub3',
+                [Node('sub3sub1', [Node('sub3sub1sub1', [])]), Node('sub3sub2', [])],
+            ),
+        ],
+    )
 
     assert draw_tree(root) == expected_output

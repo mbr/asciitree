@@ -4,7 +4,7 @@ BOX_LIGHT = {
     'UP_AND_RIGHT': u'\u2514',
     'HORIZONTAL': u'\u2500',
     'VERTICAL': u'\u2502',
-    'VERTICAL_AND_RIGHT': u'\u251C',
+    'VERTICAL_AND_RIGHT': u'\u251c',
 }  #: Unicode box-drawing glyphs, light style
 
 
@@ -17,7 +17,7 @@ BOX_HEAVY = {
 
 
 BOX_DOUBLE = {
-    'UP_AND_RIGHT': u'\u255A',
+    'UP_AND_RIGHT': u'\u255a',
     'HORIZONTAL': u'\u2550',
     'VERTICAL': u'\u2551',
     'VERTICAL_AND_RIGHT': u'\u2560',
@@ -42,6 +42,7 @@ BOX_BLANK = {
 
 class Style(KeyArgsConstructor):
     """Rendering style for trees."""
+
     label_format = u'{}'  #: Format for labels.
 
     def node_label(self, text):
@@ -69,33 +70,37 @@ class Style(KeyArgsConstructor):
 
 class BoxStyle(Style):
     """A rendering style that uses box draw characters and a common layout."""
-    gfx = BOX_ASCII   #: Glyhps to use.
-    label_space = 1   #: Space between glyphs and label.
-    horiz_len = 2     #: Length of horizontal lines
-    indent = 1        #: Indent for subtrees
+
+    gfx = BOX_ASCII  #: Glyhps to use.
+    label_space = 1  #: Space between glyphs and label.
+    horiz_len = 2  #: Length of horizontal lines
+    indent = 1  #: Indent for subtrees
 
     def child_head(self, label):
-        return (' ' * self.indent
-                + self.gfx['VERTICAL_AND_RIGHT']
-                + self.gfx['HORIZONTAL'] * self.horiz_len
-                + ' ' * self.label_space
-                + label)
+        return (
+            ' ' * self.indent
+            + self.gfx['VERTICAL_AND_RIGHT']
+            + self.gfx['HORIZONTAL'] * self.horiz_len
+            + ' ' * self.label_space
+            + label
+        )
 
     def child_tail(self, line):
-        return (' ' * self.indent
-                + self.gfx['VERTICAL']
-                + ' ' * self.horiz_len
-                + line)
+        return ' ' * self.indent + self.gfx['VERTICAL'] + ' ' * self.horiz_len + line
 
     def last_child_head(self, label):
-        return (' ' * self.indent
-                + self.gfx['UP_AND_RIGHT']
-                + self.gfx['HORIZONTAL'] * self.horiz_len
-                + ' ' * self.label_space
-                + label)
+        return (
+            ' ' * self.indent
+            + self.gfx['UP_AND_RIGHT']
+            + self.gfx['HORIZONTAL'] * self.horiz_len
+            + ' ' * self.label_space
+            + label
+        )
 
     def last_child_tail(self, line):
-        return (' ' * self.indent
-                + ' ' * len(self.gfx['VERTICAL'])
-                + ' ' * self.horiz_len
-                + line)
+        return (
+            ' ' * self.indent
+            + ' ' * len(self.gfx['VERTICAL'])
+            + ' ' * self.horiz_len
+            + line
+        )

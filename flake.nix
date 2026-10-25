@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     flake-utils.url = "github:numtide/flake-utils";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -11,6 +13,7 @@
       self,
       nixpkgs,
       flake-utils,
+      treefmt-nix,
       ...
     }:
     flake-utils.lib.eachDefaultSystem (
@@ -19,6 +22,16 @@
         pkgs = nixpkgs.legacyPackages.${system};
         python = pkgs.python3;
         pyproject = builtins.fromTOML (builtins.readFile ./pyproject.toml);
+        treefmt = treefmt-nix.lib.evalModule pkgs {
+          projectRootFile = "flake.nix";
+          programs = {
+            black.enable = true;
+            nixfmt.enable = true;
+            mdformat.enable = true;
+            taplo.enable = true;
+            shfmt.enable = true;
+          };
+        };
       in
       {
         packages.default = python.pkgs.buildPythonPackage {
@@ -41,8 +54,12 @@
           pythonImportsCheck = [ "asciitree" ];
         };
 
+        formatter = treefmt.config.build.wrapper;
+        checks.formatting = treefmt.config.build.check self;
+
         devShells.default = pkgs.mkShell {
           inputsFrom = [ self.packages.${system}.default ];
+          packages = [ treefmt.config.build.wrapper ];
         };
       }
     );

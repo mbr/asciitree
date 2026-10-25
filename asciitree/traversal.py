@@ -6,6 +6,7 @@ class Traversal(KeyArgsConstructor):
 
     Used by the tree rendering functions like :class:`~asciitree.LeftAligned`.
     """
+
     def get_children(self, node):
         """Return a list of children of a node."""
         raise NotImplementedError
@@ -22,6 +23,7 @@ class Traversal(KeyArgsConstructor):
 class DictTraversal(Traversal):
     """Traversal suitable for a dictionary. Keys are tree labels, all values
     must be dictionaries as well."""
+
     def get_children(self, node):
         return list(node[1].items())
 
@@ -37,6 +39,7 @@ class AttributeTraversal(Traversal):
 
     Uses an attribute of a node as its list of children.
     """
+
     attribute = 'children'  #: Attribute to use.
 
     def get_children(self, node):
