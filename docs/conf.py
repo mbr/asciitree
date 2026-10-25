@@ -43,6 +43,9 @@ master_doc = 'index'
 project = u'asciitree'
 copyright = u'2015-2026, Marc Brinkmann'
 
+# Preserve the explicit years when Sphinx adjusts copyright for SOURCE_DATE_EPOCH.
+html_context = {'copyright': copyright}
+
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
