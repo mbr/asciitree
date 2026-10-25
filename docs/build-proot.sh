@@ -1,4 +1,8 @@
 #!/bin/sh
+# This script builds PRoot 5.5.0, which fixes `fchmodat2` handling:
+# https://github.com/proot-me/proot/issues/387
+# Required apt packages: `build-essential`, `pkg-config`, `libtalloc-dev`,
+# `git`, and `ca-certificates`.
 set -eu
 
 cd "$(dirname "$0")/.."
