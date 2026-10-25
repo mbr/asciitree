@@ -5,10 +5,9 @@ cd "$(dirname "$0")/.."
 build_dir=$(mktemp -d)
 trap 'rm -rf "$build_dir"' EXIT
 
-curl -fL --retry 3 https://github.com/proot-me/proot/archive/refs/tags/v5.5.0.tar.gz -o "$build_dir/proot.tar.gz"
-echo "287cfb27f58e100b0153006cb352268225bb9ad9d41d9b52ed56d01a22c13e6f  $build_dir/proot.tar.gz" | sha256sum --check
-tar -xzf "$build_dir/proot.tar.gz" -C "$build_dir"
-source_dir="$build_dir/proot-5.5.0"
+source_dir="$build_dir/proot"
+git clone --depth=1 --revision=25dc6a3134891f98a79f57ce1c2c1b23ff15cad1 \
+  https://github.com/proot-me/proot.git "$source_dir"
 
 make -C "$source_dir/src" WITHOUT_PYTHON=1 VERSION=5.5.0 loader.elf loader-m32.elf build.h
 make -C "$source_dir/src" -j2 WITHOUT_PYTHON=1 VERSION=5.5.0 proot
