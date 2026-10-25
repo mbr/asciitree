@@ -12,7 +12,11 @@ build:
       - nix --version
       - |
         mkdir -p "$HOME/.config/nix"
-        printf "%s\n" "experimental-features = nix-command flakes" "sandbox-fallback = false" > "$HOME/.config/nix/nix.conf"
+        printf "%s\n" \
+          "experimental-features = nix-command flakes" \
+          "store = local?root=$HOME/.local/share/nix/root" \
+          "build-users-group =" \
+          "sandbox-fallback = false" > "$HOME/.config/nix/nix.conf"
     build:
       html:
         - nix build "^doc" -L
