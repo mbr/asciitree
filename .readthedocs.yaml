@@ -13,5 +13,5 @@ build:
       html:
         - ~/nix build "^doc" -L
         - mkdir -p "$READTHEDOCS_OUTPUT/html"
-        # Copy inside nix-portable so the virtual store paths resolve.
-        - ~/nix shell "^doc" --command sh -eu -c "cp -R result-doc/share/doc/*/html/. \"\$READTHEDOCS_OUTPUT/html/\""
+        # Resolve the virtual store paths while copying the HTML.
+        - ~/proot -b "$HOME/.nix-portable/nix:/nix" sh -eu -c "cp -R result-doc/share/doc/*/html/. \"\$READTHEDOCS_OUTPUT/html/\""
